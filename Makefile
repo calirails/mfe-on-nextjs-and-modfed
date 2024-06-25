@@ -12,11 +12,11 @@ install:
 
 #start remote
 dev-mfe2:
-	(cd mfe2; pnpm run dev)
+	(cd mfe2; pnpm run dev-lwp)
 
 #start host
 dev-mfe1:
-	cd mfe1; pnpm run dev
+	(cd mfe1; pnpm run dev-lwp)
 
 #start all
 dev:
