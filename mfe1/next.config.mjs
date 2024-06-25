@@ -10,6 +10,7 @@ const nextConfig = {
         filename: 'static/chunks/remoteEntry.js',
         remotes: {
           mfe2: `http://localhost:3001/static/${options.isServer ? 'ssr' : 'chunks'}/remoteEntry.js`,
+          // mfe2: `http://localhost:3001/static/${options.isServer ? 'ssr' : 'chunks'}/mf-manifest.json`,
         },
         shared: {},
         extraOptions: {

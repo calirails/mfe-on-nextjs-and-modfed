@@ -9,7 +9,7 @@ const RemoteButton = lazy(() => import('mfe2/Button'));
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+function Home() {
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
@@ -128,3 +128,9 @@ export default function Home() {
     </main>
   );
 }
+
+Home.getInitialProps = async ()=> {
+  return {}
+};
+
+export default Home;

@@ -1,24 +1,38 @@
-import { revalidate } from '@module-federation/nextjs-mf/utils';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
+import {
+  revalidate,
+  FlushedChunks,
+  flushChunks,
+} from '@module-federation/nextjs-mf/utils';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
-    if (ctx?.pathname && !ctx?.pathname?.endsWith('_error')) {
-      await revalidate().then((shouldUpdate) => {
-        if (shouldUpdate) {
-          console.log('Hot Module Replacement (HMR) activated', shouldUpdate);
-        }
-      });
+    if (ctx.pathname) {
+      if (!ctx.pathname.endsWith('_error')) {
+        await revalidate().then((shouldUpdate) => {
+          if (shouldUpdate) {
+            console.log('should HMR', shouldUpdate);
+          }
+        });
+      }
     }
 
     const initialProps = await Document.getInitialProps(ctx);
-    return initialProps;
+
+    const chunks = await flushChunks();
+
+    return {
+      ...initialProps,
+      chunks,
+    };
   }
 
   render() {
     return (
       <Html>
-        <Head />
+        <Head>
+          <FlushedChunks chunks={this.props.chunks} />
+        </Head>
         <body>
           <Main />
           <NextScript />
@@ -27,3 +41,5 @@ class MyDocument extends Document {
     );
   }
 }
+
+export default MyDocument;
