@@ -16,7 +16,7 @@ const nextConfig = {
       new NextFederationPlugin({
         name: 'mfe1',
         filename: 'static/chunks/remoteEntry.js',
-        // dts: false,
+        dts: false,
         remotes: remotes(options.isServer),
         shared: {},
         extraOptions: {

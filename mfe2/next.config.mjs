@@ -9,7 +9,7 @@ const nextConfig = {
         name: 'mfe2',
         filename: 'static/chunks/remoteEntry.js',
         exposes: {
-          "./Button": './components/Button.js',
+          "./button": './components/Button.js',
         },
         shared: {},
         extraOptions: {

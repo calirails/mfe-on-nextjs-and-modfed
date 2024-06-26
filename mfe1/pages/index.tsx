@@ -1,11 +1,18 @@
 import Image from "next/image";
 import { Inter } from "next/font/google";
-import { lazy } from 'react';
+
+// standard import by dynamic asynchronous import().
+import Button from 'mfe2/button';
 
 // NOTE: dynamic() will not work; instead we replace the
-// standard import by dynamic asynchronous import().
-//import { Button as RemoteButton } from 'mfe2/Button';
-const RemoteButton = lazy(() => import('mfe2/Button'));
+// import dynamic from "next/dynamic";
+// const Button = dynamic(() => import('mfe2/button'), {
+  //   loading: () => <div>Loading Remote Button from MFE2</div>
+  // });
+
+// TODO: considder if lazy import is better practice
+// import { lazy } from "react";
+// const Button = lazy(() => import('mfe2/Button'));
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -39,7 +46,7 @@ function Home() {
             {/* Module Federation Button  */}
             <div>
               <h3>Module Federation Demonstration</h3>
-              <RemoteButton></RemoteButton>
+              <Button></Button>
             </div>
           </a>
         </div>
