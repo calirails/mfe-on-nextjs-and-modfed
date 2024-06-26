@@ -1,5 +1,13 @@
 import { NextFederationPlugin } from '@module-federation/nextjs-mf';
 
+
+const remotes = isServer => {
+  const location = isServer ? 'ssr' : 'chunks';
+  return {
+    mfe2: `mfe2@http://localhost:3001/_next/static/${location}/remoteEntry.js`,
+  };
+};
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -8,10 +16,8 @@ const nextConfig = {
       new NextFederationPlugin({
         name: 'mfe1',
         filename: 'static/chunks/remoteEntry.js',
-        remotes: {
-          mfe2: `http://localhost:3001/static/${options.isServer ? 'ssr' : 'chunks'}/remoteEntry.js`,
-          // mfe2: `http://localhost:3001/static/${options.isServer ? 'ssr' : 'chunks'}/mf-manifest.json`,
-        },
+        // dts: false,
+        remotes: remotes(options.isServer),
         shared: {},
         extraOptions: {
           exposePages: true,
@@ -25,5 +31,3 @@ const nextConfig = {
 };
 
 export default nextConfig;
-
-
